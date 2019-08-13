@@ -10,7 +10,5 @@ ASMalyshev1 microservices repository
 
 #Homework #16 ("docker-3") В рамках текущего ДЗ сделано:
 
-	1. Выполняем сборку контейнера
-		docker build -t reddit:latest .
-	2. Запускаем контейнер
-		docker run --name reddit -d --network=host reddit:latest
+	1. Разобрали молит на 3 контейнера post-py, comment и ui
+	2. Подключили вольюм к контейнеру
