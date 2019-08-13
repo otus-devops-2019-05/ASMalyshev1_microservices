@@ -13,7 +13,9 @@ git checkout $branchName
 "======================="
 & git ls-files --stage
 
-Get-ChildItem -Filter *.sh -Recurse|foreach {git update-index --chmod=+x $_.FullName}
+$Gci = Get-ChildItem -Filter *.sh -Recurse
+$Gci.FullName
+$Gci|foreach {git update-index --chmod=+x $_.FullName}
 
 '& git ls-files --stage|Select-String -Pattern "^100755"'
 "======================="
