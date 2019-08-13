@@ -7,3 +7,10 @@ ASMalyshev1 microservices repository
 	2. Создали новый проект в В GCP
 	3. Создали контейнер с приложением в GCP 
 	4. Сделали образ контейнера и запушили его в https://hub.docker.com/
+
+#Homework #16 ("docker-3") В рамках текущего ДЗ сделано:
+
+	1. Выполняем сборку контейнера
+		docker build -t reddit:latest .
+	2. Запускаем контейнер
+		docker run --name reddit -d --network=host reddit:latest

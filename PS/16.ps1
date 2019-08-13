@@ -20,3 +20,10 @@ git branch $branchName
 
 # Переходим в ветку "$branchName"
 git checkout $branchName
+
+# Переходим в папку с DockerFile
+Set-Location $GitRootFolder\docker-monolith\
+# Выполняем сборку контейнера
+docker build -t reddit:latest .
+# Запускаем контейнер
+docker run --name reddit -d --network=host reddit:latest
