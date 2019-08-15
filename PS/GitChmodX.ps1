@@ -1,5 +1,5 @@
 ﻿Param(
-$branchName = 'docker-3',
+$branchName = 'docker-4',
 $GitRootFolder = 'D:\GitHub\ASMalyshev1_microservices'
 )
 
