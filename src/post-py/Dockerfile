@@ -3,11 +3,9 @@ FROM python:3.6.0-alpine
 WORKDIR /app
 ADD . /app
 
-RUN apk add --no-cache --virtual deps gcc musl-dev \
-  && pip install --upgrade pip \
-  && pip install -r /app/requirements.txt \
-  && apk del deps
-  
+RUN apk --update add build-base python3-dev && rm -rf /var/cache/apk/*
+RUN pip install -r /app/requirements.txt
+
 ENV POST_DATABASE_HOST post_db
 ENV POST_DATABASE posts
 
