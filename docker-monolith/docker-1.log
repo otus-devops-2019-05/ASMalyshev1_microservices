@@ -1,6 +1,5 @@
 REPOSITORY                 TAG                 IMAGE ID            CREATED             SIZE
-yourname/ubuntu-tmp-file   latest              ffa904e187e4        17 seconds ago      120MB
-ubuntu                     16.04               5e13f8dd4c1a        8 days ago          120MB
+yourname/ubuntu-tmp-file   latest              6b2f0b461032        19 seconds ago      120MB
+ubuntu                     16.04               5e13f8dd4c1a        10 days ago         120MB
 hello-world                latest              fce289e99eb9        7 months ago        1.84kB
 
-Контейнер от образа отличается тем, что в контейнере есть R\W слой, который добавляется путём изолирования окружения (pid,namespaces,veth,etc) от хоста. В образе описан лишь образ операционной системы, базовые переенные окружения, имя образа и слои, а в контейнере создаётся изоляция процессов хоста на основе этого образа.
