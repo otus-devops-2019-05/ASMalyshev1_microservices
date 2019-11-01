@@ -7,3 +7,4 @@
 key.json
 vault.key
 .env
+*.log
