@@ -69,3 +69,8 @@ ASMalyshev1 microservices repository
 	
     1. Изучены Ingress контроллеры и управление volumes
     2. Созданы конфигурационные файлы для разворачивания ресурсов
+	
+#Homework #28 ("kubernetes-4") В рамках текущего ДЗ сделано:
+	
+    1. Изучены возможности плагина tiller
+    2. Изучены возможности использования gitlab-ci в kubernetes
