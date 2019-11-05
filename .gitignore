@@ -8,3 +8,5 @@ key.json
 vault.key
 .env
 *.log
+.idea
+credentials.json

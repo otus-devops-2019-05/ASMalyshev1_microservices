@@ -7,36 +7,38 @@ stages:
   - stage
   - production
 
-variables: 
+variables:
   DATABASE_URL: 'mongodb://mongo/user_posts'
 
-before_script: 
-  - cd reddit 
+before_script:
+  - cd reddit
   - bundle install
+
 
 build_job:
   stage: build
   script:
     - echo 'Building'
 
-test_unit_job: 
-  stage: test 
-  services: 
-    - mongo:latest 
-  script: 
+test_unit_job:
+  stage: test
+  services:
+    - mongo:latest
+  script:
     - ruby simpletest.rb
+    - echo 'Testing 1'
 
 test_integration_job:
   stage: test
   script:
     - echo 'Testing 2'
 
-deploy_dev_job: 
-  stage: review 
-  script: 
+deploy_dev_job:
+  stage: review
+  script:
     - echo 'Deploy'
-  environment: 
-    name: dev 
+  environment:
+    name: dev
     url: http://dev.example.com
 
 branch review:
@@ -50,25 +52,24 @@ branch review:
   except:
     - master
 
-staging: 
-  stage: stage 
+staging:
+  stage: stage
   when: manual
-  only: 
-    - /^\d+\.\d+\.\d+/ 
-  script: 
-    - echo 'Deploy'
-  environment: 
-    name: stage 
-    url: https://beta.example.com 
-
-production: 
-  stage: production 
-  when: manual
-  only: 
-    - /^\d+\.\d+\.\d+/ 
+  only:
+    - /^\d+\.\d+\.\d+/
   script:
     - echo 'Deploy'
-  environment: 
-    name: production 
-    url: https://example.com
+  environment:
+    name: stage
+    url: https://beta.example.com
 
+production:
+  stage: production
+  when: manual
+  only:
+    - /^\d+\.\d+\.\d+/
+  script:
+    - echo 'Deploy'
+  environment:
+    name: production
+    url: https://example.com
