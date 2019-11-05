@@ -1,0 +1,20 @@
+comment:
+  image:
+    repository: thethir13en/comment
+    tag: latest
+  service:
+    externalPort: 9292
+
+post:
+  image:
+    repository: thethir13en/post
+    tag: latest
+  service:
+    externalPort: 5000
+
+ui:
+  image:
+    repository: thethir13en/ui
+    tag: latest
+  service:
+    externalPort: 9292

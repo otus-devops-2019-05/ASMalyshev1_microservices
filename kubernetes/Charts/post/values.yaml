@@ -1,0 +1,10 @@
+---
+service:
+  internalPort: 5000
+  externalPort: 5000
+
+image:
+  repository: thethir13en/post
+  tag: latest
+
+databaseHost:
