@@ -1,11 +1,19 @@
 FROM python:3.6.0-alpine
 
 WORKDIR /app
-ADD . /app
 
-RUN apk add --update gcc python python-dev py-pip build-base musl-dev
-RUN pip install --upgrade pip
-RUN pip install -r /app/requirements.txt
+RUN apk update && apk add --no-cache --virtual build-dependencies \
+                         build-base \
+                         gcc \
+                         wget \
+                         git
+
+COPY requirements.txt /app/requirements.txt
+
+RUN pip install -r /app/requirements.txt && \
+    apk del build-dependencies
+
+COPY . .
 
 ENV POST_DATABASE_HOST post_db
 ENV POST_DATABASE posts

@@ -1,8 +1,15 @@
-version: '3.3'
-services:
+version: "3.3"
+networks:
+  reddit:
+  reddit-front:
 
+volumes:
+  prometheus_data:
+  grafana_data:
+
+services:
   prometheus:
-    image: ${USER_NAME}/prometheus
+    image: ${USERNAME}/prometheus
     ports:
       - '9090:9090'
     volumes:
@@ -12,8 +19,8 @@ services:
       - '--storage.tsdb.path=/prometheus'
       - '--storage.tsdb.retention=1d'
     networks:
-      back_net:
-      front_net:
+      - reddit
+      - reddit-front
 
   node-exporter:
     image: prom/node-exporter:v0.15.2
@@ -27,8 +34,8 @@ services:
       - '--path.sysfs=/host/sys'
       - '--collector.filesystem.ignored-mount-points="^/(sys|proc|dev|host|etc)($$|/)"'
     networks:
-      - front_net
-      - back_net
+      - reddit
+      - reddit-front
 
   cadvisor:
     image: google/cadvisor:v0.29.0
@@ -40,8 +47,8 @@ services:
     ports:
       - '8080:8080'
     networks:
-      back_net:
-      front_net:
+      - reddit
+      - reddit-front
 
   grafana:
     image: grafana/grafana:5.0.0
@@ -55,24 +62,15 @@ services:
     ports:
       - 3000:3000
     networks:
-      back_net:
-      front_net:
+      - reddit
+      - reddit-front
 
   alertmanager:
-    image: ${USER_NAME}/alertmanager
+    image: ${USERNAME}/alertmanager
     command:
       - '--config.file=/etc/alertmanager/config.yml'
     ports:
       - 9093:9093
     networks:
-      back_net:
-      front_net:
-
-
-volumes:
-  prometheus_data:
-  grafana_data:
-
-networks:
-  front_net:
-  back_net:
+      - reddit
+      - reddit-front
