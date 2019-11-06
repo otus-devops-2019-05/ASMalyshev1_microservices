@@ -1,0 +1,35 @@
+---
+- hosts: gitlab-ci
+  become: true
+
+  tasks:
+
+    - name: Install required system packages
+      apt: name={{ item }} state=latest update_cache=yes
+      loop: [ 'apt-transport-https', 'ca-certificates', 'curl', 'software-properties-common', 'python3-pip', 'virtualenv', 'python3-setuptools', 'python-pip', 'python-setuptools']
+
+    - name: Add Docker GPG apt Key
+      apt_key:
+        url: https://download.docker.com/linux/ubuntu/gpg
+        state: present
+
+    - name: Add Docker Repository
+      apt_repository:
+        repo: deb https://download.docker.com/linux/ubuntu bionic stable
+        state: present
+
+    - name: Update apt and install
+      apt:
+        name: ['docker-ce', 'docker-compose']
+        state: present
+
+
+    - name: Create directories
+      file:
+        path: "{{ item }}"
+        state: directory
+        mode: 0755
+      with_items:
+        - /srv/gitlab/config
+        - /srv/gitlab/data
+        - /srv/gitlab/logs

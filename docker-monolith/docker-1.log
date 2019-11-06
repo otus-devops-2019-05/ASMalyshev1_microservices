@@ -1,5 +1,0 @@
-REPOSITORY                 TAG                 IMAGE ID            CREATED              SIZE
-iazarkin/ubuntu-tmp-file   latest              0ae045e9d4ec        About a minute ago   121MB
-nginx                      latest              f949e7d76d63        2 weeks ago          126MB
-ubuntu                     16.04               657d80a6401d        3 weeks ago          121MB
-hello-world                latest              fce289e99eb9        9 months ago         1.84kB

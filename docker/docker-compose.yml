@@ -1,0 +1,46 @@
+version: '3.3'
+services:
+  post_db:
+    image: mongo:3.2
+    volumes:
+      - post_db:/data/db
+    networks:
+      back_net:
+        aliases:
+          - comment_db
+          - post_db
+  ui:
+    image: ${USER_NAME}/ui:${UI_VERSION}
+    ports:
+      - ${HOST_PORT}:${CONTAINER_PORT}/tcp
+    networks:
+      front_net:
+        aliases:
+          - ui
+  post:
+    image: ${USER_NAME}/post:${POST_VERSION}
+    networks:
+      back_net:
+        aliases:
+          - post
+      front_net:
+        aliases:
+          - post
+
+  comment:
+    image: ${USER_NAME}/comment:${COMMENT_VERSION}
+    networks:
+      back_net:
+        aliases:
+          - comment
+      front_net:
+        aliases:
+          - comment
+
+volumes:
+  post_db:
+  prometheus_data:
+
+networks:
+  front_net:
+  back_net:
