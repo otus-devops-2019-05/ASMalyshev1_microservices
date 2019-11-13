@@ -10,3 +10,5 @@ vault.key
 *.log
 .idea
 credentials.json
+*.crt
+*.key
