@@ -74,3 +74,9 @@ ASMalyshev1 microservices repository
 	
     1. Изучены возможности плагина tiller
     2. Изучены возможности использования gitlab-ci в kubernetes
+	
+#Homework #29 ("kubernetes-5") В рамках текущего ДЗ сделано:
+		
+    1. Изучено управление лейблами в Prometheus
+    2. Управление переменными в Grafana
+    3. Варианты быстрого устройства логгирования и мониторинга в kubernetes
