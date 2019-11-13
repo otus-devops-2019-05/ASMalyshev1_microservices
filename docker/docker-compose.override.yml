@@ -1,0 +1,63 @@
+version: '3.3'
+services:
+
+  post_db:
+    image: mongo:${MONGODB_IMAGE_VERSION}
+    volumes:
+      - post_db:/data/db
+    networks:
+      - reddit
+
+  ui:
+    image: ${USERNAME}/ui:${APP_UI_VERSION}
+    environment:
+      - ZIPKIN_ENABLED=${ZIPKIN_ENABLED}
+    command:
+      - "--debug"
+      - "-w 2"
+    volumes:
+      - ./ui:/app
+    logging:
+      driver: "fluentd"
+      options:
+        fluentd-address: localhost:24224
+        tag: service.ui
+    ports:
+      - ${APP_UI_PORT}:9292/tcp
+    networks:
+      - reddit-front
+
+  post:
+    image: ${USERNAME}/post:${APP_POST_VERSION}
+    environment:
+      - ZIPKIN_ENABLED=${ZIPKIN_ENABLED}
+    volumes:
+      - ./post-py:/app
+    logging:
+      driver: "fluentd"
+      options:
+        fluentd-address: localhost:24224
+        tag: service.post
+    networks:
+      - reddit
+      - reddit-front
+
+  comment:
+    image: ${USERNAME}/comment:${APP_COMMENT_VERSION}
+    environment:
+      - ZIPKIN_ENABLED=${ZIPKIN_ENABLED}
+    command:
+      - "--debug"
+      - "-w 2"
+    volumes:
+      - ./comment:/app
+    networks:
+      - reddit
+      - reddit-front
+
+volumes:
+  post_db:
+
+networks:
+  reddit:
+  reddit-front:
